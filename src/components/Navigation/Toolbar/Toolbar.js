@@ -2,10 +2,11 @@ import React from "react";
 import styles from "./Toolbar.module.css";
 import Logo from "../../Logo/Logo";
 import NavigationItems from "../NavigationItems/NavigationItems";
+import DrawerToggler from "../SideDrawer/DrawerToggle/DrawerToggler";
 
-const toolbar = () => (
+const toolbar = ({ dtTogglerClicked }) => (
   <header className={styles.Toolbar}>
-    <div>MENU</div>
+    <DrawerToggler clicked={dtTogglerClicked} />
     <Logo logoHeight="80%" />
     <nav className={styles.DesktopOnly}>
       <NavigationItems />
