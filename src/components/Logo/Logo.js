@@ -1,6 +1,7 @@
 import React from "react";
 import burgerLogo from "../../assests/images/burger-logo.png";
 import styles from "./Logo.module.css";
+import PropTypes from "prop-types";
 
 const logo = ({ logoHeight }) => (
   <div className={styles.Logo} style={{ height: logoHeight }}>
@@ -9,3 +10,7 @@ const logo = ({ logoHeight }) => (
 );
 
 export default logo;
+
+logo.protoTypes = {
+  logoHeight: PropTypes.string.required
+};
