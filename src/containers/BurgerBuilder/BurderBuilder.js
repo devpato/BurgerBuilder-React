@@ -12,7 +12,7 @@ const INGREDIENT_PRICES = {
   salad: 0.5,
   cheese: 0.4,
   meat: 1.3,
-  bacon: 0.7
+  bacon: 0.7,
 };
 class BurgerBuilder extends Component {
   // constructor(props) {
@@ -26,21 +26,21 @@ class BurgerBuilder extends Component {
     purchasable: false,
     purchasing: false,
     loading: false,
-    error: false
+    error: false,
   };
 
   componentDidMount() {
     axios
       .get("https://burger-builder-react-js.firebaseio.com/ingredients.json")
-      .then(res => {
+      .then((res) => {
         this.setState({ ingredients: res.data });
       })
-      .catch(err => this.setState({ error: true }));
+      .catch((err) => this.setState({ error: true }));
   }
 
   updatePurchaseState(ingredients) {
     const sum = Object.keys(ingredients)
-      .map(i => {
+      .map((i) => {
         return ingredients[i];
       })
       .reduce((acc, crr) => acc + crr, 0);
@@ -48,11 +48,11 @@ class BurgerBuilder extends Component {
     this.setState({ purchasable: sum > 0 });
   }
 
-  addIngredientHandler = type => {
+  addIngredientHandler = (type) => {
     const oldCount = this.state.ingredients[type];
     const updatedCounted = oldCount + 1;
     const updatedIngredients = {
-      ...this.state.ingredients
+      ...this.state.ingredients,
     };
 
     updatedIngredients[type] = updatedCounted;
@@ -63,7 +63,7 @@ class BurgerBuilder extends Component {
     this.updatePurchaseState(updatedIngredients);
   };
 
-  removeIngredientHandler = type => {
+  removeIngredientHandler = (type) => {
     const oldCount = this.state.ingredients[type];
 
     if (oldCount <= 0) {
@@ -72,7 +72,7 @@ class BurgerBuilder extends Component {
 
     const updatedCounted = oldCount - 1;
     const updatedIngredients = {
-      ...this.state.ingredients
+      ...this.state.ingredients,
     };
 
     updatedIngredients[type] = updatedCounted;
@@ -92,32 +92,33 @@ class BurgerBuilder extends Component {
   };
 
   continueHandler = () => {
-    this.setState({ loading: true });
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: "Pato",
-        address: {
-          street: "4566 Kerle St",
-          zipCode: 32205,
-          email: "test@test.com"
-        },
-        deliveryMethod: "fastest"
-      }
-    };
+    // this.setState({ loading: true });
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   price: this.state.totalPrice,
+    //   customer: {
+    //     name: "Pato",
+    //     address: {
+    //       street: "4566 Kerle St",
+    //       zipCode: 32205,
+    //       email: "test@test.com"
+    //     },
+    //     deliveryMethod: "fastest"
+    //   }
+    // };
 
-    axios
-      .post("/orders.json", order)
-      .then(res => this.setState({ loading: false, purchasing: false }))
-      .catch(err => {
-        this.setState({ loading: true, purchasing: false });
-      });
+    // axios
+    //   .post("/orders.json", order)
+    //   .then(res => this.setState({ loading: false, purchasing: false }))
+    //   .catch(err => {
+    //     this.setState({ loading: true, purchasing: false });
+    //   });
+    this.props.history.push("/checkout");
   };
 
   render() {
     const disabledInfo = {
-      ...this.state.ingredients
+      ...this.state.ingredients,
     };
 
     for (let key in disabledInfo) {

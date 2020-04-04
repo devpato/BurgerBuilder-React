@@ -3,7 +3,11 @@ import Burger from "../../Burger/Burger";
 import Button from "../../UI/Button/Button";
 import styles from "./CheckoutSummary.module.css";
 
-const checkoutSummary = ({ ingredients }) => {
+const checkoutSummary = ({
+  ingredients,
+  checkoutCancelled,
+  checkoutContinue,
+}) => {
   return (
     <div className={styles.CheckoutSummary}>
       <h1>We hope it taste well</h1>
@@ -15,16 +19,14 @@ const checkoutSummary = ({ ingredients }) => {
           justifyContent: "center",
         }}
       >
-        <div>
-          <Burger ingredients={ingredients} />
-          <Button btnType="Danger" clicked>
-            CANCEL
-          </Button>
-          <Button btnType="Success" clicked>
-            CONTINUE
-          </Button>
-        </div>
+        <Burger ingredients={ingredients} />
       </div>
+      <Button btnType="Danger" clicked={checkoutCancelled}>
+        CANCEL
+      </Button>
+      <Button btnType="Success" clicked={checkoutContinue}>
+        CONTINUE
+      </Button>
     </div>
   );
 };
