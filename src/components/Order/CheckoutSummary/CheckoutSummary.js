@@ -7,15 +7,24 @@ const checkoutSummary = ({ ingredients }) => {
   return (
     <div className={styles.CheckoutSummary}>
       <h1>We hope it taste well</h1>
-      <div style={{ width: "100%", display: "flex" }}>
-        <Burger ingredients={ingredients} />
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <div>
+          <Burger ingredients={ingredients} />
+          <Button btnType="Danger" clicked>
+            CANCEL
+          </Button>
+          <Button btnType="Success" clicked>
+            CONTINUE
+          </Button>
+        </div>
       </div>
-      <Button btnType="Danger" clicked>
-        CANCEL
-      </Button>
-      <Button btnType="Success" clicked>
-        CONTINUE
-      </Button>
     </div>
   );
 };
